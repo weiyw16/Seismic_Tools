@@ -1,0 +1,28 @@
+#!/bin/bash 
+modelnum=16
+shotnum=15
+nr=126 #$4
+nt=2048 #$5
+#prefix=$1
+for ((this_model=0; this_model < ${modelnum}; this_model++))
+do
+  for((this_shot=0; this_shot < ${shotnum}; this_shot++))
+  do 
+    tarname=$(( ${this_model} * ${shotnum} + ${this_shot} ))
+    echo "in=${tarname} n1=128 n2=2048 data_format=native_float" > tmp.rsf
+    sfwindow < tmp.rsf f1=1 n1=${nr} \
+      f2=0 n2=${nt} | \
+      sfput o1=500 d1=20 label1=Depth unit1=m o2=0 d2=0.002 label2=Time unit2=s |
+      sftransp plane=12 > show.rsf
+
+   
+    sfgrey < show.rsf wanttitle=n screenratio=1.4 screenht=10 \
+      labelsz=6 font=2 titlesz=6 pclip=97 pad=n scalebar=y > ${tarname}.vpl
+    
+    vpconvert `pwd`/${tarname}.vpl color=y fat=2 serifs=y format=eps
+    sfrm show.rsf
+    rm tmp.rsf ${tarname}.vpl
+    #gv ${tar}.eps
+  done
+done
+

@@ -15,14 +15,14 @@ nr=126 #$4
 nt=2048 #$5
 sfwindow < tmp.rsf f1=1 n1=${nr} \
   f2=0 n2=${nt} | \
-  sfput o1=1000 d1=15 label1=Depth unit1=m o2=0 d2=0.008 label2=Time unit2=s |
+  sfput o1=500 d1=20 label1=Depth unit1=m o2=0 d2=0.002 label2=Time unit2=s |
   sftransp plane=12 > show.rsf
 
 sfgrey < show.rsf wanttitle=n screenratio=1.4 screenht=10 \
   labelsz=6 font=2 titlesz=6 pclip=97 pad=n scalebar=y > show.vpl
 
 vpconvert `pwd`/show.vpl color=y fat=2 serifs=y format=eps
-sfrm show.rsf
+rm show.rsf
 rm tmp.rsf show.vpl
 gv show.eps
 

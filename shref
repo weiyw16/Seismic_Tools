@@ -8,7 +8,7 @@
 ## readin data
 
 #echo "in=$1 n1=$2 n2=$3 data_format=native_float" >> tmp.rsf
-echo "in=$1 n1=126 n2=2048 data_format=native_float" > tmp.rsf
+#echo "in=$1 n1=126 n2=2048 data_format=native_float" > tmp.rsf
 echo "in=$1 n1=2048 n2=126 data_format=native_float" > tmp.rsf
 
 ## cut
@@ -19,14 +19,14 @@ nt=2048 #$5
 #  sfput o1=1000 d1=15 label1=Depth unit1=m o2=0 d2=0.008 label2=Time unit2=s |
 #  sftransp plane=12 > show.rsf
 sftransp < tmp.rsf plane=12 |
-  sfput o1=1000 d1=15 label1=Depth unit1=m o2=0 d2=0.008 label2=Time unit2=s |
+  sfput o1=500 d1=20 label1=Depth unit1=m o2=0 d2=0.002 label2=Time unit2=s |
   sftransp plane=12 > show.rsf
 
 sfgrey < show.rsf wanttitle=n screenratio=1.4 screenht=10 \
   labelsz=6 font=2 titlesz=6 pclip=97 pad=n scalebar=y > show.vpl
 
 vpconvert `pwd`/show.vpl color=y fat=2 serifs=y format=eps
-sfrm show.rsf
+rm show.rsf
 rm tmp.rsf show.vpl
 gv show.eps
 
