@@ -8,21 +8,21 @@
 ## readin data
 
 #echo "in=$1 n1=$2 n2=$3 data_format=native_float" >> tmp.rsf
-echo "in=$1 n1=128 n2=2048 data_format=native_float" > tmp.rsf
+#echo "in=$1 n1=126 n2=2048 data_format=native_float" > tmp.rsf
+echo "in=$1 n1=2048 n2=126 data_format=native_float" > tmp.rsf
 
 ## cut
 nr=126 #$4
 nt=2048 #$5
-sfwindow < tmp.rsf f1=1 n1=${nr} \
-  f2=0 n2=${nt} | \
+#sfwindow < tmp.rsf f1=0 n1=${nr} \
+#  f2=0 n2=${nt} | \
+#  sfput o1=1000 d1=15 label1=Depth unit1=m o2=0 d2=0.008 label2=Time unit2=s |
+#  sftransp plane=12 > show.rsf
+sftransp < tmp.rsf plane=12 |
   sfput o1=500 d1=20 label1=Depth unit1=m o2=0 d2=0.002 label2=Time unit2=s |
   sftransp plane=12 > show.rsf
 
-#sfwiggle < show.rsf wanttitle=n screenratio=1.4 screenht=10 \
-#  maxval=1 minval=-1 transp=y yreverse=y \
-#  labelsz=6 font=2 titlesz=6 pclip=100 pad=n scalebar=y > show.vpl
 sfgrey < show.rsf wanttitle=n screenratio=1.4 screenht=10 \
-  color=owb gpow=2 \
   labelsz=6 font=2 titlesz=6 pclip=97 pad=n scalebar=y > show.vpl
 
 vpconvert `pwd`/show.vpl color=y fat=2 serifs=y format=eps

@@ -22,7 +22,7 @@ sfwindow < tmp.rsf f1=1 n1=${nr} \
 #  maxval=1 minval=-1 transp=y yreverse=y \
 #  labelsz=6 font=2 titlesz=6 pclip=100 pad=n scalebar=y > show.vpl
 sfgrey < show.rsf wanttitle=n screenratio=1.4 screenht=10 \
-  color=owb gpow=2 \
+  maxval=1 minval=-1 color=owb \
   labelsz=6 font=2 titlesz=6 pclip=97 pad=n scalebar=y > show.vpl
 
 vpconvert `pwd`/show.vpl color=y fat=2 serifs=y format=eps
